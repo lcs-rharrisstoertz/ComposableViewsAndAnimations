@@ -20,6 +20,18 @@ struct ExerciseOneView: View {
 
     // Whether to apply the animation
     @State private var useAnimation = false
+    
+    // Controls the size of the text
+    @State private var scaleFactor: CGFloat = 1.0
+
+    // Controls the color of the text
+    @State private var hue: Color = .red
+    
+    // Controls position of text
+    @State private var offsetx: CGFloat = 0
+    // Controls position of text
+    
+    @State private var offsety: CGFloat = 0
 
     // MARK: Computed properties
 
@@ -42,6 +54,18 @@ struct ExerciseOneView: View {
                 
                 Text(typeFace)
                     .font(.custom(typeFace, size: 30.0))
+                    .foregroundColor(hue)
+                    .scaleEffect(scaleFactor)
+                    .offset(x: offsetx, y: offsety)
+                    .onTapGesture {
+                        hue = Color(hue: Double.random(in: 1...360) / 360.0,
+                                    saturation: 0.8,
+                                    brightness: 0.8)
+                        scaleFactor = CGFloat.random(in: 0.1...5)
+                        offsetx = CGFloat.random(in: -50...50)
+                        offsety = CGFloat.random(in: -50...50)
+                    }
+                    .animation(useAnimation ? .linear(duration: 2.5) : .none)
                 
             }
             .navigationTitle("Exercise 1")
