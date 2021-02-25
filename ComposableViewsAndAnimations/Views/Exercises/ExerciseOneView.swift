@@ -14,9 +14,6 @@ struct ExerciseOneView: View {
     
     // Controls whether this view is showing or not
     @Binding var showThisView: Bool
-        
-    // Controls what typeface the text is shown in
-    @State private var typeFace: String = "Helvetica-Neue"
 
     // Whether to apply the animation
     @State private var useAnimation = false
@@ -52,8 +49,7 @@ struct ExerciseOneView: View {
             
             VStack {
                 
-                Text(typeFace)
-                    .font(.custom(typeFace, size: 30.0))
+                Circle()
                     .foregroundColor(hue)
                     .scaleEffect(scaleFactor)
                     .offset(x: offsetx, y: offsety)

@@ -15,11 +15,14 @@ struct ExerciseThreeView: View {
     // Controls whether this view is showing or not
     @Binding var showThisView: Bool
         
-    // Controls what typeface the text is shown in
-    @State private var typeFace: String = "Helvetica-Neue"
+    //vertical offset
+    @State private var yOffset: CGFloat = 0
 
     // Whether to apply the animation
     @State private var useAnimation = false
+    
+    //color
+    @State private var hue: Color = .blue
 
     // MARK: Computed properties
 
@@ -38,12 +41,25 @@ struct ExerciseThreeView: View {
         
         NavigationView {
             
-            VStack {
+            HStack {
                 
-                // NOTE: Here are some neat examples to consider...
-                //       https://medium.com/better-programming/create-an-awesome-loading-state-using-swiftui-9815ff6abb80
-                Text(typeFace)
-                    .font(.custom(typeFace, size: 30.0))
+                Circle()
+                    .foregroundColor(hue)
+                    .frame(width: 30, height: 30)
+                    .offset(y: yOffset)
+                    .onTapGesture {
+                        withAnimation(.easeOut(duration: 0.5)) {
+                            yOffset -= 150
+                                }
+                        let timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (timer) in
+                            withAnimation(.easeIn(duration: 0.5)) {
+                                yOffset += 150
+                                    }
+                        }
+                            hue = Color(hue: Double.random(in: 150...320) / 360.0,
+                                        saturation: 0.8,
+                                        brightness: 0.8)
+                    }
                 
             }
             .navigationTitle("Exercise 3")
@@ -53,6 +69,7 @@ struct ExerciseThreeView: View {
                         hideView()
                     }
                 }
+                
             }
 
         }

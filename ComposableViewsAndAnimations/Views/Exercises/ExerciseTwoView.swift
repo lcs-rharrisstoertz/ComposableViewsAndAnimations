@@ -53,8 +53,7 @@ struct ExerciseTwoView: View {
             
             VStack {
                 
-                Text(typeFace)
-                    .font(.custom(typeFace, size: 30.0))
+                Circle()
                     .foregroundColor(hue)
                     .scaleEffect(scaleFactor)
                     .offset(x: offsetx, y: offsety)
