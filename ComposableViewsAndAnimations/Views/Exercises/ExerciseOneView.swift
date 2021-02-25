@@ -14,9 +14,6 @@ struct ExerciseOneView: View {
     
     // Controls whether this view is showing or not
     @Binding var showThisView: Bool
-
-    // Whether to apply the animation
-    @State private var useAnimation = false
     
     // Controls the size of the text
     @State private var scaleFactor: CGFloat = 1.0
@@ -61,7 +58,7 @@ struct ExerciseOneView: View {
                         offsetx = CGFloat.random(in: -50...50)
                         offsety = CGFloat.random(in: -50...50)
                     }
-                    .animation(useAnimation ? .linear(duration: 2.5) : .none)
+                    .animation(.linear(duration: 2.5))
                 
             }
             .navigationTitle("Exercise 1")
