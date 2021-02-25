@@ -14,18 +14,18 @@ struct ExerciseThreeView: View {
     
     // Controls whether this view is showing or not
     @Binding var showThisView: Bool
-        
+    
     //vertical offset
     @State private var yOffset: CGFloat = 0
-
+    
     // Whether to apply the animation
     @State private var useAnimation = false
     
     //color
     @State private var hue: Color = .blue
-
+    
     // MARK: Computed properties
-
+    
     // List all fonts available
     // NOTE: This is a very useful gist...
     //       https://gist.github.com/kristopherjohnson/c825cb97b1ad1fe0bc13d709986d0763
@@ -36,7 +36,7 @@ struct ExerciseThreeView: View {
         }
         return names.sorted()
     }()
-
+    
     var body: some View {
         
         NavigationView {
@@ -50,15 +50,14 @@ struct ExerciseThreeView: View {
                     .onTapGesture {
                         withAnimation(.easeOut(duration: 0.5)) {
                             yOffset -= 150
-                                }
-                        let timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (timer) in
-                            withAnimation(.easeIn(duration: 0.5)) {
-                                yOffset += 150
-                                    }
                         }
-                            hue = Color(hue: Double.random(in: 150...320) / 360.0,
-                                        saturation: 0.8,
-                                        brightness: 0.8)
+                        withAnimation(.easeIn(duration: 0.5).delay(0.5)) {
+                            yOffset += 150
+                        }
+                        
+                        hue = Color(hue: Double.random(in: 150...320) / 360.0,
+                                    saturation: 0.8,
+                                    brightness: 0.8)
                     }
                 
             }
@@ -71,7 +70,7 @@ struct ExerciseThreeView: View {
                 }
                 
             }
-
+            
         }
         
     }
